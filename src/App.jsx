@@ -1,4 +1,3 @@
-import { FaArrowRight } from "react-icons/fa";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { AiOutlineReload } from "react-icons/ai";
 import { useEffect, useState } from "react";
@@ -62,7 +61,7 @@ function App() {
 		},
 	];
 	const [displayedText, setDisplayedText] = useState("");
-	const [step, setStep] = useState(4);
+	const [step, setStep] = useState(0);
 	const [loading, setLoading] = useState(true);
 
 	const launchFireworks = () => {
