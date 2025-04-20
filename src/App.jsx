@@ -16,9 +16,9 @@ function App() {
 			display_by_step: true,
 		},
 		{
-			text: `Fiz esse sitezinho simples para
+			text: `Fiz essa cartinha para
         te parabenizar já que hoje é seu aniversário! \n
-        É realmente bem simples, mas é uma maneira que encontei de fazer algo diferente.
+        É bem simples, nada de mais, apenas uma lembraça, mas é feito de coração.
       `,
 			pre_action: null,
 			post_action: null,
@@ -27,7 +27,7 @@ function App() {
 		{
 			text: `Espero que goste! \n
       Assim como espero que goste dos presentes...\n
-      São apenas bens materias e não expressam o que sinto por você, mas que te dou com muito carinho e de coração.
+      São apenas bens materias e não chegam a expressar o que sinto por você, mas que te dou com muito carinho.
     `,
 			pre_action: null,
 			post_action: null,
@@ -35,13 +35,13 @@ function App() {
 		},
 		{
 			text: `Enfim!\n
-        É seu aniversário então...
+        É seu aniversário, então...
       `,
 			pre_action: null,
 			post_action: () =>
 				setTimeout(() => {
 					handleNextClick();
-				}, 500),
+				}, 700),
 			display_by_step: true,
 			disable_all_buttons: true,
 		},
@@ -52,7 +52,7 @@ function App() {
 			display_by_step: false,
 		},
 		{
-			text: `Que seu ano seja repleto de amor, sorrisos e momentos incríveis. 💜\n
+			text: `Que seu ano, e sua vida, sejam repletos de amor, sorrisos e felicidade. 💜\n
         Um beijo!\n
         Aproveite seu dia :)
       `,
@@ -62,7 +62,7 @@ function App() {
 		},
 	];
 	const [displayedText, setDisplayedText] = useState("");
-	const [step, setStep] = useState(0);
+	const [step, setStep] = useState(4);
 	const [loading, setLoading] = useState(true);
 
 	const launchFireworks = () => {
@@ -111,12 +111,17 @@ function App() {
 					clearInterval(interval);
 					if (post_action) post_action();
 				}
-			}, 70);
+			}, 80);
 		}
 
 		if (!display_by_step) {
 			setDisplayedText(text);
-			setLoading(false);
+			if (step === 4) {
+				setLoading(true);
+				setTimeout(() => {
+					setLoading(false);
+				}, 5500);
+			} else setLoading(false);
 		}
 
 		return () => interval && clearInterval(interval);
