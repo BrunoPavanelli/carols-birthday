@@ -16,8 +16,12 @@ export const Container = styled.div`
 	width: 100vw;
 	min-width: 100vw;
 	max-width: 100vw;
+	min-height: 100vh;
+	max-height: 100vh;
 	text-align: center;
 	padding: 2rem;
+
+	overflow-y: auto;
 
 	/* background: #E8DCE5;
   background: linear-gradient(112deg,rgba(232, 220, 229, 1) 0%, rgba(255, 255, 255, 1) 49%, rgba(232, 220, 229, 1) 100%); */
@@ -48,6 +52,8 @@ export const Container = styled.div`
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
+
+	padding-bottom: 60px;
 `;
 
 export const Wrapper = styled.div`

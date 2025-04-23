@@ -15,8 +15,8 @@ function App() {
 			display_by_step: true,
 		},
 		{
-			text: `Fiz essa cartinha para
-        te parabenizar já que hoje é seu aniversário! \n
+			text: `Fiz essa carta para
+        te dar os parabéns já que hoje é seu aniversário! \n
         É bem simples, nada de mais, apenas uma lembraça, mas é feito de coração.
       `,
 			pre_action: null,
@@ -26,7 +26,7 @@ function App() {
 		{
 			text: `Espero que goste! \n
       Assim como espero que goste dos presentes...\n
-      São apenas bens materias e não chegam a expressar o que sinto por você, mas que te dou com muito carinho.
+      São apenas bens materiais e não chegam a expressar o que sinto por você, mas que te dou com muito carinho.
     `,
 			pre_action: null,
 			post_action: null,
@@ -51,9 +51,27 @@ function App() {
 			display_by_step: false,
 		},
 		{
-			text: `Que seu ano, e sua vida, sejam repletos de amor, sorrisos e felicidade. 💜\n
-        Um beijo!\n
-        Aproveite seu dia :)
+			text: `Que seu ano seja maravilhoso, com muito amor e felicidade.\n
+        Que esse novo ciclo da sua vida te traga muita positividade, conquistas, alegrias... Enfim! Tudo de melhor que essa vida possa te dar. 💜\n
+      `,
+			pre_action: null,
+			post_action: null,
+			display_by_step: true,
+		},
+		{
+			text: `
+        Queria te dizer que te admiro muito, Carol.\n
+        Você é uma pessoa incrível... Forte, leal e sincera. Tão linda que eu fico sem jeito... Meiga, fofa e atrasada as vezes!\n
+        Mas de verdade, você é incrível!
+      `,
+			pre_action: null,
+			post_action: null,
+			display_by_step: true,
+		},
+		{
+			text: `
+        Então, aproveita seu dia :)\n
+        Um beijo Caroline!
       `,
 			pre_action: null,
 			post_action: null,
