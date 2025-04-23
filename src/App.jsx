@@ -1,182 +1,50 @@
-import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
-import { AiOutlineReload } from "react-icons/ai";
-import { useEffect, useState } from "react";
-import confetti from "canvas-confetti";
-import HeartsRain from "./Components/HeartsRain";
 import * as S from "./styles.js";
+import { QRCodeSVG } from "qrcode.react";
+import { BsEnvelopeHeartFill, BsEnvelopeHeart } from "react-icons/bs";
+import { TiHeartOutline } from "react-icons/ti";
+import { GiChainedHeart } from "react-icons/gi";
+import { GiMineralHeart } from "react-icons/gi";
+import { GiOppositeHearts } from "react-icons/gi";
+import { BsArrowThroughHeartFill } from "react-icons/bs";
+
+import { GiPartyPopper } from "react-icons/gi";
 
 function App() {
-	const texts = [
-		{
-			text: `Oi dona Carol!\n Espero que você esteja bem :)
-      `,
-			pre_action: null,
-			post_action: null,
-			display_by_step: true,
-		},
-		{
-			text: `Fiz essa cartinha para
-        te parabenizar já que hoje é seu aniversário! \n
-        É bem simples, nada de mais, apenas uma lembraça, mas é feito de coração.
-      `,
-			pre_action: null,
-			post_action: null,
-			display_by_step: true,
-		},
-		{
-			text: `Espero que goste! \n
-      Assim como espero que goste dos presentes...\n
-      São apenas bens materias e não chegam a expressar o que sinto por você, mas que te dou com muito carinho.
-    `,
-			pre_action: null,
-			post_action: null,
-			display_by_step: true,
-		},
-		{
-			text: `Enfim!\n
-        É seu aniversário, então...
-      `,
-			pre_action: null,
-			post_action: () =>
-				setTimeout(() => {
-					handleNextClick();
-				}, 700),
-			display_by_step: true,
-			disable_all_buttons: true,
-		},
-		{
-			text: "PARABÉNS",
-			pre_action: () => launchFireworks(),
-			post_action: null,
-			display_by_step: false,
-		},
-		{
-			text: `Que seu ano, e sua vida, sejam repletos de amor, sorrisos e felicidade. 💜\n
-        Um beijo!\n
-        Aproveite seu dia :)
-      `,
-			pre_action: null,
-			post_action: null,
-			display_by_step: true,
-		},
-	];
-	const [displayedText, setDisplayedText] = useState("");
-	const [step, setStep] = useState(0);
-	const [loading, setLoading] = useState(true);
-
-	const launchFireworks = () => {
-		const duration = 5 * 1000;
-		const animationEnd = Date.now() + duration;
-		const defaults = {
-			startVelocity: 30,
-			spread: 360,
-			ticks: 60,
-			zIndex: 1000,
-		};
-
-		const interval = setInterval(() => {
-			const timeLeft = animationEnd - Date.now();
-
-			if (timeLeft <= 0) {
-				return clearInterval(interval);
-			}
-
-			confetti({
-				...defaults,
-				particleCount: 100,
-				origin: {
-					x: Math.random(),
-					y: Math.random() - 0.2,
-				},
-			});
-		}, 250);
-	};
-
-	useEffect(() => {
-		let index = 0;
-		const { text, pre_action, post_action, display_by_step } = texts[step];
-
-		setLoading(true);
-		if (pre_action) pre_action();
-
-		let interval;
-		if (display_by_step) {
-			interval = setInterval(() => {
-				setDisplayedText(text.slice(0, index + 1));
-				index++;
-
-				if (index === text.length) {
-					setLoading(false);
-					clearInterval(interval);
-					if (post_action) post_action();
-				}
-			}, 80);
-		}
-
-		if (!display_by_step) {
-			setDisplayedText(text);
-			if (step === 4) {
-				setLoading(true);
-				setTimeout(() => {
-					setLoading(false);
-				}, 5500);
-			} else setLoading(false);
-		}
-
-		return () => interval && clearInterval(interval);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [step]);
-
-	const nextDisabledCondition = step === texts.length - 1;
-	const handleNextClick = () => {
-		if (nextDisabledCondition) return;
-		setStep((prev) => prev + 1);
-	};
-
-	const backDisabledCondition = step === 0;
-	const handleBackClick = () => {
-		if (backDisabledCondition) return;
-		setStep((prev) => prev - 1);
-	};
-
-	const handleRestartClick = () => {
-		if (backDisabledCondition) return;
-		setStep(0);
-	};
-
-	const conditionToDisableAllButtons = texts[step].disable_all_buttons;
 	return (
 		<S.Container>
-			{step === 4 && <HeartsRain />}
-			<S.Wrapper>
-				<S.Message step={step}>{displayedText}</S.Message>
-				<S.ButtonsWrapper>
-					<S.NextButton
-						onClick={() => handleBackClick()}
-						disabled={
-							loading || backDisabledCondition || conditionToDisableAllButtons
-						}
-					>
-						<IoIosArrowBack size={20} color="#fff" />
-					</S.NextButton>
-					<S.NextButton
-						onClick={() => handleRestartClick()}
-						disabled={
-							loading || backDisabledCondition || conditionToDisableAllButtons
-						}
-					>
-						<AiOutlineReload size={20} color="#fff" />
-					</S.NextButton>
-					<S.NextButton
-						onClick={() => handleNextClick()}
-						disabled={
-							loading || nextDisabledCondition || conditionToDisableAllButtons
-						}
-					>
-						<IoIosArrowForward size={20} color="#fff" />
-					</S.NextButton>
-				</S.ButtonsWrapper>
-			</S.Wrapper>
+			<S.BorderWrapper>
+				<S.QRCodeWrapper>
+					<QRCodeSVG
+						value="https://carolsbirthday.vercel.app/"
+						fgColor="#fff"
+						bgColor={S.choosePurple(4)}
+						level="Q"
+						style={{ width: S.qrSize, height: S.qrSize }}
+					/>
+					{/* <S.EmojiOverlay>💟</S.EmojiOverlay> */}
+					{/* <S.EmojiOverlay>💜</S.EmojiOverlay> */}
+					{/* <S.EmojiOverlay>🌷</S.EmojiOverlay> */}
+
+					{/* <S.EmojiOverlay><BsEnvelopeHeartFill /></S.EmojiOverlay> */}
+
+					{/* <S.EmojiOverlay>
+						<BsEnvelopeHeart />
+					</S.EmojiOverlay> */}
+
+					{/* <S.EmojiOverlay>
+						<TiHeartOutline />
+					</S.EmojiOverlay> */}
+
+					{/* Melhor ate entao */}
+					<S.EmojiOverlay>
+						<GiChainedHeart />
+					</S.EmojiOverlay>
+
+					{/* <S.EmojiOverlay>
+						<BsArrowThroughHeartFill />
+					</S.EmojiOverlay> */}
+				</S.QRCodeWrapper>
+			</S.BorderWrapper>
 		</S.Container>
 	);
 }

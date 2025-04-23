@@ -2,9 +2,16 @@ import styled, { keyframes, css } from "styled-components";
 import Bg from "./assets/white-texture.jpg";
 
 const purples = ["#d37edc", "#c58bc5", "#a51ea5", "#c145c1", "#8e44ad"];
-const setPurple = () => {
+export const setPurple = () => {
 	return purples[4];
 };
+
+export const choosePurple = (i) => {
+	return purples[i];
+};
+
+export const qrSize = 350;
+const qrSizePx = `${qrSize}px`;
 
 export const Container = styled.div`
 	box-sizing: border-box;
@@ -48,6 +55,67 @@ export const Container = styled.div`
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
+`;
+
+export const BorderWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	max-height: ${qrSizePx};
+	max-width: ${qrSizePx};
+	aspect-ratio: 2/1;
+	border: 20px solid transparent;
+	border-image: linear-gradient(
+		112deg,
+		rgba(142, 68, 173, 1) 0%,
+		rgba(173, 95, 173, 1) 18%,
+		rgba(250, 232, 250, 1) 34%,
+		rgba(247, 230, 247, 1) 50%,
+		rgba(250, 232, 250, 1) 66%,
+		rgba(173, 95, 173, 1) 83%,
+		rgba(142, 68, 173, 1) 100%
+	);
+	border-image-slice: 1;
+	background-color: #fff;
+
+	font-size: 130px;
+	font-weight: 700;
+	color: rgba(77, 20, 140, 1);
+
+	padding: 12px;
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+`;
+
+export const QRCodeWrapper = styled.div`
+	position: relative;
+	width: ${qrSizePx};
+	height: ${qrSizePx};
+`;
+
+export const EmojiOverlay = styled.div`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 30px;
+	pointer-events: none; /* não bloqueia leitura do QR */
+	z-index: 10;
+	border: 2px solid #fff;
+	border-radius: 7px;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	padding: 4px;
+	color: ${choosePurple(4)};
 `;
 
 export const Wrapper = styled.div`
