@@ -91,7 +91,7 @@ const animateGradient = keyframes`
 
 export const Message = styled.p`
 	white-space: pre-line;
-	font-size: ${({ step }) => (step === 4 ? "4rem" : "1.75rem")};
+	font-size: ${({ step }) => (step === 4 ? "4rem" : "1.35rem")};
 	font-weight: ${({ step }) => (step === 4 ? "900" : "600")};
 	color: ${setPurple()};
 	text-align: center;

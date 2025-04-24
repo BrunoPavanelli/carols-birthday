@@ -8,15 +8,16 @@ import * as S from "./styles.js";
 function App() {
 	const texts = [
 		{
-			text: `Oi dona Carol!\n Espero que você esteja bem :)
+			text: `Oi dona Carol!
+      Espero que você esteja bem :)
       `,
 			pre_action: null,
 			post_action: null,
 			display_by_step: true,
 		},
 		{
-			text: `Fiz essa carta para
-        te dar os parabéns já que hoje é seu aniversário! \n
+			text: `Bom.. Eu fiz esse sitezinho para
+        te dar os parabéns já que hoje é seu aniversário!\n
         É bem simples, nada de mais, apenas uma lembraça, mas é feito de coração.
       `,
 			pre_action: null,
@@ -24,7 +25,7 @@ function App() {
 			display_by_step: true,
 		},
 		{
-			text: `Espero que goste! \n
+			text: `Espero que goste! 
       Assim como espero que goste dos presentes...\n
       São apenas bens materiais e não chegam a expressar o que sinto por você, mas que te dou com muito carinho.
     `,
@@ -33,7 +34,7 @@ function App() {
 			display_by_step: true,
 		},
 		{
-			text: `Enfim!\n
+			text: `Enfim!
         É seu aniversário, então...
       `,
 			pre_action: null,
@@ -42,7 +43,12 @@ function App() {
 					handleNextClick();
 				}, 700),
 			display_by_step: true,
-			disable_all_buttons: true,
+			disable_all_buttons: {
+				back: false,
+				restart: false,
+				next: true,
+			},
+			not_load: true,
 		},
 		{
 			text: "PARABÉNS",
@@ -51,8 +57,9 @@ function App() {
 			display_by_step: false,
 		},
 		{
-			text: `Que seu ano seja maravilhoso, com muito amor e felicidade.\n
-        Que esse novo ciclo da sua vida te traga muita positividade, conquistas, alegrias... Enfim! Tudo de melhor que essa vida possa te dar. 💜\n
+			text: `Que seu ano seja maravilhoso, com muito amor e felicidade.
+        E, que esse novo ciclo da sua vida te traga muitas conquistas, positividade, alegrias... 
+        Enfim! Tudo de melhor que essa vida possa te dar. 💜
       `,
 			pre_action: null,
 			post_action: null,
@@ -60,9 +67,10 @@ function App() {
 		},
 		{
 			text: `
-        Queria te dizer que te admiro muito, Carol.\n
-        Você é uma pessoa incrível... Forte, leal e sincera. Tão linda que eu fico sem jeito... Meiga, fofa e atrasada as vezes!\n
-        Mas de verdade, você é incrível!
+        Você merece muito!
+        Você é uma pessoa incrível... Forte, leal e sincera. Uma mulher inteligente e de coração enorme. 
+        As vezes me pego até sem jeito quando te vejo...\n
+        De verdade, você é incrível!
       `,
 			pre_action: null,
 			post_action: null,
@@ -70,7 +78,8 @@ function App() {
 		},
 		{
 			text: `
-        Então, aproveita seu dia :)\n
+        Então é isso, aproveite seu dia :)
+        Feliz aniversário! 
         Um beijo Caroline!
       `,
 			pre_action: null,
@@ -114,7 +123,7 @@ function App() {
 		let index = 0;
 		const { text, pre_action, post_action, display_by_step } = texts[step];
 
-		setLoading(true);
+		if (!texts[step].not_load) setLoading(true);
 		if (pre_action) pre_action();
 
 		let interval;
@@ -172,7 +181,9 @@ function App() {
 					<S.NextButton
 						onClick={() => handleBackClick()}
 						disabled={
-							loading || backDisabledCondition || conditionToDisableAllButtons
+							loading ||
+							backDisabledCondition ||
+							conditionToDisableAllButtons?.back
 						}
 					>
 						<IoIosArrowBack size={20} color="#fff" />
@@ -180,7 +191,9 @@ function App() {
 					<S.NextButton
 						onClick={() => handleRestartClick()}
 						disabled={
-							loading || backDisabledCondition || conditionToDisableAllButtons
+							loading ||
+							backDisabledCondition ||
+							conditionToDisableAllButtons?.restart
 						}
 					>
 						<AiOutlineReload size={20} color="#fff" />
@@ -188,7 +201,9 @@ function App() {
 					<S.NextButton
 						onClick={() => handleNextClick()}
 						disabled={
-							loading || nextDisabledCondition || conditionToDisableAllButtons
+							loading ||
+							nextDisabledCondition ||
+							conditionToDisableAllButtons?.next
 						}
 					>
 						<IoIosArrowForward size={20} color="#fff" />
