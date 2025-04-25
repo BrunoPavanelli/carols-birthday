@@ -58,6 +58,12 @@ function App() {
 			pre_action: () => launchFireworks(),
 			post_action: null,
 			display_by_step: false,
+			disable_all_buttons: {
+				back: false,
+				restart: false,
+				next: false,
+			},
+			not_load: true,
 		},
 		{
 			text: `Que seu ano seja maravilhoso, com muito amor e felicidade.\n
@@ -147,7 +153,7 @@ function App() {
 
 		if (!display_by_step) {
 			setDisplayedText(text);
-			if (step === 4) {
+			if (step === 4 && !texts[step].not_load) {
 				setLoading(true);
 				setTimeout(() => {
 					setLoading(false);
