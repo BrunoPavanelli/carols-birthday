@@ -48,8 +48,8 @@ const Gifts = ({ backFn }) => {
 						Aqui é o seguinte: Eu sei o quanto você gosta de F1, e eu queria te
 						dar algo para decoração da sua casa. Não sei se você vai gostar, mas
 						espero que sim! Eu queria mesmo era a Mercedes do Lewis Halmiton de
-						2020 que foi o ultimo ano que ele ganhou, mas a que eu achei estava
-						beeeem fora de orçamento, então peguei a de 2023!
+						2020 que foi o ultimo ano que ele foi campeão, mas a que eu achei
+						era um absurdo de cara e grandona também, então peguei a de 2023!
 					</S.Description>
 
 					<S.NextButton onClick={() => setSelectedGift(null)}>
@@ -93,7 +93,7 @@ const Gifts = ({ backFn }) => {
 						Então, eu fui no Bourbon esses dias comprar um perfume né... Passei
 						em frente a loja da L'occitane e não consegui me segurar. Como eu já
 						tinha te dado um óleo dessa linha de amêndoas, e sei que esse
-						esfoliante é muito bom, acabei pegando pra completar!
+						esfoliante é muito bom, acabei pegando pra completar a caixa!
 					</S.Description>
 
 					<S.NextButton onClick={() => setSelectedGift(null)}>

@@ -1,6 +1,8 @@
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { AiOutlineReload } from "react-icons/ai";
 import { useEffect, useState } from "react";
+
+import { PiWarningFill } from "react-icons/pi";
 import confetti from "canvas-confetti";
 import HeartsRain from "./Components/HeartsRain";
 import * as S from "./styles.js";
@@ -45,8 +47,8 @@ function App() {
 				}, 700),
 			display_by_step: true,
 			disable_all_buttons: {
-				back: false,
-				restart: false,
+				back: true,
+				restart: true,
 				next: true,
 			},
 			not_load: true,
@@ -59,7 +61,7 @@ function App() {
 		},
 		{
 			text: `Que seu ano seja maravilhoso, com muito amor e felicidade.\n
-        E, que esse novo ciclo da sua vida te traga muitas conquistas, positividade, alegrias... \n
+        E, que esse novo ciclo da sua vida te traga muitas conquistas, alegrias, positividade... \n
         Enfim! Tudo de melhor que essa vida possa te dar. 💜
       `,
 			pre_action: null,
@@ -80,7 +82,7 @@ function App() {
 		{
 			text: `
         Então é isso, aproveite seu dia :)
-        Feliz aniversário! \n
+        Feliz aniversário!\n
         Um beijo Caroline!
       `,
 			pre_action: null,
@@ -199,7 +201,8 @@ function App() {
 			return (
 				<>
 					<S.Wrapper>
-						<S.Message>Opa!</S.Message>
+						<PiWarningFill size={40} color={S.setPurple()} />
+						{/* <S.Message>Opa!</S.Message> */}
 						<S.Message>
 							Aqui só pode continuar se já tiver visto os presentes...
 						</S.Message>
@@ -216,7 +219,7 @@ function App() {
 			return (
 				<>
 					<S.Wrapper>
-						<S.Message>Hmmm...</S.Message>
+						<S.Message>Hmmm... 🤔</S.Message>
 						<S.Message>
 							Então volta lá, veja tudo bonitinho e ai volte aqui!
 						</S.Message>

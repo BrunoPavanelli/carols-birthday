@@ -3,10 +3,10 @@ import Bg from "./assets/white-texture.jpg";
 
 const purples = ["#d37edc", "#c58bc5", "#a51ea5", "#c145c1", "#8e44ad"];
 
-const choosePurple = (index) => {
+export const choosePurple = (index) => {
 	return purples[index];
 };
-const setPurple = () => {
+export const setPurple = () => {
 	return purples[4];
 };
 
