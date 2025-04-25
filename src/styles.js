@@ -2,6 +2,10 @@ import styled, { keyframes, css } from "styled-components";
 import Bg from "./assets/white-texture.jpg";
 
 const purples = ["#d37edc", "#c58bc5", "#a51ea5", "#c145c1", "#8e44ad"];
+
+const choosePurple = (index) => {
+	return purples[index];
+};
 const setPurple = () => {
 	return purples[4];
 };
@@ -64,6 +68,7 @@ export const Wrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	max-width: 600px;
+	gap: 20px;
 `;
 
 const popUp = keyframes`
@@ -96,6 +101,7 @@ export const Message = styled.p`
 	color: ${setPurple()};
 	text-align: center;
 	transition: all 0.4s ease;
+	margin: 0;
 	/* line-height: 35px; */
 
 	${({ step }) =>
@@ -137,6 +143,47 @@ export const NextButton = styled.button`
 	border: none;
 	padding: 1rem;
 	border-radius: 999px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+	cursor: pointer;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&:hover {
+		transform: scale(1.05);
+		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+	}
+`;
+
+const shine = keyframes`
+  0% {
+    opacity: 0.5;
+    color: ${choosePurple(1)};	
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    color: ${choosePurple(2)};
+    transform: scale(1.05);
+  }
+`;
+
+export const MoreInfo = styled.span`
+	font-size: 0.8rem;
+	color: ${choosePurple(1)};
+	text-decoration: underline;
+	cursor: pointer;
+	animation: ${shine} 2s linear infinite;
+`;
+
+export const Button = styled.button`
+	background-color: ${() => setPurple()};
+	opacity: ${({ disabled }) => (disabled ? 0.33 : 1)};
+	border: none;
+	padding: 1rem;
+	border-radius: 10px;
+	width: 100%;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
 	cursor: pointer;
 	transition: all 0.3s ease;

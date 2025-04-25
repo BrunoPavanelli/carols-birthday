@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import confetti from "canvas-confetti";
 import HeartsRain from "./Components/HeartsRain";
 import * as S from "./styles.js";
+import Gifts from "./Components/Gifts/index.jsx";
 
 function App() {
 	const texts = [
@@ -57,8 +58,8 @@ function App() {
 			display_by_step: false,
 		},
 		{
-			text: `Que seu ano seja maravilhoso, com muito amor e felicidade.
-        E, que esse novo ciclo da sua vida te traga muitas conquistas, positividade, alegrias... 
+			text: `Que seu ano seja maravilhoso, com muito amor e felicidade.\n
+        E, que esse novo ciclo da sua vida te traga muitas conquistas, positividade, alegrias... \n
         Enfim! Tudo de melhor que essa vida possa te dar. 💜
       `,
 			pre_action: null,
@@ -79,7 +80,7 @@ function App() {
 		{
 			text: `
         Então é isso, aproveite seu dia :)
-        Feliz aniversário! 
+        Feliz aniversário! \n
         Um beijo Caroline!
       `,
 			pre_action: null,
@@ -89,6 +90,8 @@ function App() {
 	];
 	const [displayedText, setDisplayedText] = useState("");
 	const [step, setStep] = useState(0);
+	const [componentStep, setComponentStep] = useState(0);
+	const [secondComponentStep, setSecondComponentStep] = useState(0);
 	const [loading, setLoading] = useState(true);
 
 	const launchFireworks = () => {
@@ -172,46 +175,117 @@ function App() {
 	};
 
 	const conditionToDisableAllButtons = texts[step].disable_all_buttons;
-	return (
-		<S.Container>
-			{step === 4 && <HeartsRain />}
-			<S.Wrapper>
-				<S.Message step={step}>{displayedText}</S.Message>
-				<S.ButtonsWrapper>
-					<S.NextButton
-						onClick={() => handleBackClick()}
-						disabled={
-							loading ||
-							backDisabledCondition ||
-							conditionToDisableAllButtons?.back
-						}
-					>
-						<IoIosArrowBack size={20} color="#fff" />
-					</S.NextButton>
-					<S.NextButton
-						onClick={() => handleRestartClick()}
-						disabled={
-							loading ||
-							backDisabledCondition ||
-							conditionToDisableAllButtons?.restart
-						}
-					>
-						<AiOutlineReload size={20} color="#fff" />
-					</S.NextButton>
-					<S.NextButton
-						onClick={() => handleNextClick()}
-						disabled={
-							loading ||
-							nextDisabledCondition ||
-							conditionToDisableAllButtons?.next
-						}
-					>
-						<IoIosArrowForward size={20} color="#fff" />
-					</S.NextButton>
-				</S.ButtonsWrapper>
-			</S.Wrapper>
-		</S.Container>
-	);
+
+	const handleNoButtonClick = () => {
+		setSecondComponentStep(1);
+	};
+
+	const handleYesButtonClick = () => {
+		setSecondComponentStep(2);
+	};
+
+	const handleSecondComponentBackButtonClick = () => {
+		setSecondComponentStep(0);
+		setComponentStep(0);
+	};
+
+	const handleBackInGifts = () => {
+		setComponentStep(0);
+		setSecondComponentStep(0);
+	};
+
+	const getSecondComponentComponet = () => {
+		if (secondComponentStep === 0)
+			return (
+				<>
+					<S.Wrapper>
+						<S.Message>Opa!</S.Message>
+						<S.Message>
+							Aqui só pode continuar se já tiver visto os presentes...
+						</S.Message>
+						<S.Message>Você já viu os presentes?</S.Message>
+						<S.ButtonsWrapper>
+							<S.Button onClick={handleYesButtonClick}>Sim</S.Button>
+							<S.Button onClick={handleNoButtonClick}>Não</S.Button>
+						</S.ButtonsWrapper>
+					</S.Wrapper>
+				</>
+			);
+
+		if (secondComponentStep === 1)
+			return (
+				<>
+					<S.Wrapper>
+						<S.Message>Hmmm...</S.Message>
+						<S.Message>
+							Então volta lá, veja tudo bonitinho e ai volte aqui!
+						</S.Message>
+						<S.ButtonsWrapper>
+							<S.Button onClick={handleSecondComponentBackButtonClick}>
+								Voltar
+							</S.Button>
+						</S.ButtonsWrapper>
+					</S.Wrapper>
+				</>
+			);
+
+		if (secondComponentStep === 2) return <Gifts backFn={handleBackInGifts} />;
+	};
+
+	const conditionToRenderMoreInfo = !loading && step === texts.length - 1;
+
+	const getComponent = () => {
+		if (componentStep === 0)
+			return (
+				<>
+					{step === 4 && <HeartsRain />}
+					<S.Wrapper>
+						<S.Message step={step}>{displayedText}</S.Message>
+						<S.ButtonsWrapper>
+							<S.NextButton
+								onClick={() => handleBackClick()}
+								disabled={
+									loading ||
+									backDisabledCondition ||
+									conditionToDisableAllButtons?.back
+								}
+							>
+								<IoIosArrowBack size={20} color="#fff" />
+							</S.NextButton>
+							<S.NextButton
+								onClick={() => handleRestartClick()}
+								disabled={
+									loading ||
+									backDisabledCondition ||
+									conditionToDisableAllButtons?.restart
+								}
+							>
+								<AiOutlineReload size={20} color="#fff" />
+							</S.NextButton>
+							<S.NextButton
+								onClick={() => handleNextClick()}
+								disabled={
+									loading ||
+									nextDisabledCondition ||
+									conditionToDisableAllButtons?.next
+								}
+							>
+								<IoIosArrowForward size={20} color="#fff" />
+							</S.NextButton>
+						</S.ButtonsWrapper>
+						{conditionToRenderMoreInfo && (
+							<S.MoreInfo onClick={() => setComponentStep(1)}>
+								Mais informações
+							</S.MoreInfo>
+						)}
+					</S.Wrapper>
+				</>
+			);
+
+		if (componentStep === 1) return getSecondComponentComponet();
+	};
+
+	return <S.Container>{getComponent()}</S.Container>;
 }
 
 export default App;
