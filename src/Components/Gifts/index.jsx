@@ -59,17 +59,17 @@ const Gifts = ({ backFn }) => {
 			),
 		},
 		{
-			name: "Chocolate Baccio",
+			name: "Chocolate Bacio",
 			icon: <GiChocolateBar size={20} color="#fff" />,
 			component: (
 				<S.GiftWrapper>
 					<S.TitleWrapper>
-						<S.Title>Chocolate Baccio</S.Title>
+						<S.Title>Chocolate Bacio</S.Title>
 						<GiChocolateBar size={40} color={setPurple()} />
 					</S.TitleWrapper>
 
 					<S.Description>
-						Acho que aqui não preciso dizer muito... Chocolate da Baccio, e
+						Acho que aqui não preciso dizer muito... Chocolate da Bacio, e
 						branco ainda... 🤤🤤🤤🤤
 					</S.Description>
 
